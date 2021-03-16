@@ -1,0 +1,24 @@
+{
+  "name": "Froggy-Chatroom",
+  "version": "1.2.1",
+  "description": "A chatroom made by the Froggers",
+  "main": "index.js",
+  "dependencies": {
+    "bad-words": "^3.0.4",
+    "cookie-parser": "^1.4.5",
+    "express": "^4.17.1",
+    "marked": "^2.0.0",
+    "nodemon": "^2.0.7",
+    "serve-favicon": "^2.5.0",
+    "socket.io": "^3.1.1",
+    "sweetalert": "^2.1.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "devStart": "nodemon server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "@UnluckyFroggy (JS), @InvisibleOne (JS), @ch1ck3n (JS), @Coder100 (JS), @YeetsaJr (HTML, CSS), @Codemonkey51 (JS)",
+  "license": "ISC"
+}
