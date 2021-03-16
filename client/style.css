@@ -1,0 +1,605 @@
+/*
+╋╋╋┏┓╋╋╋╋┏┓
+╋╋┏┛┗┓╋╋╋┃┃
+┏━┻┓┏╋┓╋┏┫┃┏━━┓
+┃━━┫┃┃┃╋┃┃┃┃┃━┫
+┣━━┃┗┫┗━┛┃┗┫┃━┫
+┗━━┻━┻━┓┏┻━┻━━┛
+╋╋╋╋╋┏━┛┃
+╋╋╋╋╋┗━━┛
+*/
+
+/* general */
+
+:root {
+	--u: calc(0.5vh + 0.5vw);
+	--du: calc(var(--u) * 2);
+	--bg: #222;
+	--bd: #000;
+  --time: #90a4ae;
+  --border: 5px black;
+  --sidebar: #111;
+  --checkbox: #eee;
+  --checkbox-hover: #ccc;
+  --name: #00bcd4;
+  --red: red;
+  --openbtn: #111;
+  --openbtn-content: white;
+  --openbtn-hover: #444;
+  --message-hover: black;
+  --green: #00eb27;
+  --orange: orange;
+  --sidebar-close-hover: #f1f1f1;
+  --message: #ffffff;
+  --input-bottom: #ffffff80;
+  --room-text: black;
+  --room-btn: white;
+
+	height: 100%;
+	width: 100%;
+	margin: 0px;
+  font-family: roboto;
+  font-size: 20px;
+  overflow: auto;
+  user-select: none;
+}
+
+a{
+  color: aqua;
+}
+
+body {
+	height: 100%;
+	width: 100%;
+	margin: 0px;
+  background-color: var(--bd);
+	color: white;
+}
+
+input {
+	border: none;
+	size: 300%;
+  color: white;
+}
+
+button {
+	background-color: white;
+}
+/* main content */
+
+#main-container {
+	height: calc(100% - var(--du));
+	width: calc(100% - var(--du));
+	padding: var(--u);
+	display: grid;
+	grid-template-columns: 100%;
+	grid-template-rows: auto 1fr;
+	row-gap: var(--u);
+  margin: auto;
+}
+
+#main-content {
+	display: grid;
+	column-gap: var(--u);
+	grid-template-columns: 80% 20%;
+	grid-template-rows: 1fr auto;
+	height: 100%;
+	min-height: 0;
+  position: relative;
+  width: 100%;
+  z-index: 0;
+}
+
+.red{
+  color: var(--red);
+}
+
+.white{
+  color:white;
+}
+
+.green{
+  color: var(--green);
+}
+
+.gray{
+  color:gray;
+}
+
+.yellow{
+  color:yellow;
+}
+
+.orange{
+  color: var(--orange);
+}
+
+.purple{
+  color: purple;
+}
+
+.blue{
+  color:blue;
+}
+
+.name-color{
+  color: var(--name);
+}
+.announcement {
+	color: #77eb42;
+}
+
+#main-content > * ~ * {
+	background-color: var(--bg);
+	padding: var(--u);
+	width: calc(100% - var(--du));
+	height: calc(100% - var(--du));
+}
+
+#chats {
+	border-top-right-radius: var(--u);
+	border-top-left-radius: var(--u);
+  border: var(--border);
+  border-style: solid;
+  overflow: auto;
+}
+
+#controls {
+	border-bottom-right-radius: var(--u);
+	border-bottom-left-radius: var(--u);
+	grid-column: 1 / span 1;
+	grid-row: 2 / span 2;
+  padding: 12px;
+  height: 45px;
+  width: 98.25%;
+  white-space:nowrap;
+}
+
+#prompt{
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  align-self: center;
+  z-index: 10;
+  background-color: rgb(0, 0, 0);
+  font-size: 38px;
+  text-align: center;
+  box-sizing: border-box;
+  padding: 20px;
+  padding-top: 90px;
+}
+
+#who-container {
+	border-radius: var(--u);
+	padding: var(--u);
+	grid-column: 2 / span 1;
+	grid-row: 1 / span 2;
+}
+
+.message { 
+  float: left; 
+  width: 100%;
+}
+
+.message-content:hover, .name:hover{
+  background-color: var(--message-hover);
+  transition-duration: .2s
+}
+
+span {
+  word-wrap: break-word;
+}
+
+textarea{
+  border: none;
+  border-radius: 0;
+  border-bottom: 3px solid var(--input-bottom);
+  font-size: 20px;
+  background-color: rgba(0, 0, 0, 0);
+  font-family: roboto;
+  margin: 0;
+  padding: 4px 0;
+  text-align: left;
+  transition-duration: 0.3s;
+}
+textarea:focus{
+  outline: none;
+  border-bottom: 2px solid var(--openbtn-content);
+}
+/* All Messages */
+.message{
+  /* width: 300px; */
+  color: var(--message);
+}
+.name {
+	color: var(--name) !important;
+  border-radius: 2px;
+}
+#message {
+	width: 91%;
+	color: var(--openbtn-content);
+  overflow: auto;
+  position: relative;
+  height: 60%;
+  resize: none;
+  top: 20%;
+  left: 1%
+}
+@media (max-width: 580px){
+  #message{
+    width: calc(100% - 71px);
+  }
+}
+
+.send {
+  position: fixed;
+  right: 21%;
+}
+
+.label{
+  background: none;
+  display: inline-block;
+  height: 100%;
+  width: 100px;
+  font-weight: 400;
+  transition-duration: 0s;
+  font-size: inherit;
+  margin: 0;
+  padding: 13px;
+  box-sizing: border-box;
+}
+
+.tooltip{
+  position: fixed;
+  background-color: grey;
+  z-index: 3;
+  color: white;
+  display: inline-block;
+  border-radius: 3px;
+  padding: 5px;
+}
+
+button{
+  font: 20px roboto;
+  border-radius: 2px;
+  border: none;
+  color: #000000;
+  background-color: #ffffff;
+  outline: none;
+  padding: 11px;
+}
+
+button:hover{
+  background-color:#e2e2e2;
+}
+
+.name{
+  border-radius: 2px;
+  font-weight: 550;
+}
+
+.time{
+  color: var(--time);
+  font-size: 15px;
+  line-height: 25px;
+  float: right;
+  height: 100%;
+  margin-left: 5px;
+}
+.delete{
+  height: 25px;
+  font-size: 15px;
+  float: right;
+  background-color: #d32f2f;
+  padding: 5px;
+  box-sizing: border-box;
+  color: white;
+}
+.delete:hover{
+  background-color: #b71c1c;
+}
+
+/* scrollbars */
+
+::-webkit-scrollbar{
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+    background-color: var(--bg); 
+}
+::-webkit-scrollbar-thumb {
+    background: #888; 
+    border-radius: 1px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+}
+
+.sidebar {
+  height: 20%;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: var(--sidebar);
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 60px;
+}
+
+.sidebar a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 20px;
+  color: #818181;
+  display: block;
+  transition: 0.3s;
+}
+
+.sidebar a:hover {
+  color: var(--sidebar-close-hover);
+}
+
+.sidebar .closebtn {
+  position: absolute;
+  top: 0;
+  right: 10px;
+  font-size: 36px;
+  margin-left: 50px;
+}
+
+.openbtn {
+  font-size: 20px;
+  cursor: pointer;
+  background-color: var(--openbtn);
+  color: var(--openbtn-content);
+  padding: 0px 9px;
+  border: none;
+}
+
+.openbtn:hover {
+  background-color: var(--openbtn-hover);
+}
+
+@media screen and (max-height: 450px) {
+  .sidebar {padding-top: 15px;}
+  .sidebar a {font-size: 18px;}
+}
+
+/* The container */
+.container {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 22px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Hide the browser's default checkbox */
+.container input {
+  position: absolute;
+  display: block;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+  background-color: var(--checkbox);
+}
+
+/* Create a custom checkbox */
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 50;
+  height: 25px;
+  width: 25px;
+  background-color: var(--checkbox);
+}
+
+/* On mouse-over, add a grey background color */
+.container:hover input ~ .checkmark {
+  background-color: var(--checkbox-hover);
+}
+
+/* When the checkbox is checked, add a blue background */
+.container input:checked ~ .checkmark {
+  background-color: #2196F3;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the checkmark when checked */
+.container input:checked ~ .checkmark:after {
+  display: block;
+}
+
+/* Style the checkmark/indicator */
+.container .checkmark:after {
+  left: 9px;
+  top: 5px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  transform: rotate(45deg);
+}
+
+.center {
+	text-align: center;
+}
+
+.loginOR {
+	font-size: 20px; 
+}
+
+.create-room {
+  position: fixed;
+  top: 2px;
+  right: 2px;
+  height: 50px;
+  width: 132px;
+  text-align: center;
+  font-size: 15px;
+}
+
+.join-room {
+  position: fixed;
+  top: 2px;
+  right: 137px;
+  height: 50px;
+  width: 132px;
+  text-align: center;
+  font-size: 15px;
+}
+
+.announcements {
+  position: fixed;
+  top: 2px;
+  right: 272px;
+  height: 50px;
+  width: 132px;
+  text-align: center;
+  font-size: 15px;
+}
+
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4);
+}
+
+/* Modal Content */
+.modal-content {
+  position: relative;
+  background-color: #333;
+  margin: auto;
+  padding: 0;
+  width: 80%;
+  -webkit-animation-name: animatetop;
+  -webkit-animation-duration: 0.4s;
+  animation-name: animatetop;
+  animation-duration: 0.4s
+}
+
+/* Add Animation */
+@-webkit-keyframes animatetop {
+  from {top:-300px; opacity:0} 
+  to {top:0; opacity:1}
+}
+
+@keyframes animatetop {
+  from {top:-300px; opacity:0}
+  to {top:0; opacity:1}
+}
+
+/* The Close Button */
+.close {
+  color: white;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.modal-header {
+  padding: 2px 16px;
+  background-color: #222;
+  color: white;
+}
+
+.modal-body {padding: 2px 16px;}
+
+.text {
+  color: white;
+}
+
+#loadingScreen {
+	margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
+#loadingpic {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	width: 50%;
+	height: 50%;
+	animation: rotate 2s infinite linear;
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(359deg);
+  }
+}
+
+.toggleableTheme {
+  background-color: white; 
+	color: black;
+	--bg: #e7e7e7;
+  --time: #000000;
+  --border: 5px white;
+  --sidebar: #f1f1f1;
+  --checkbox: #333;
+  --checkbox-hover: #111;
+  --name: #00008B;
+  --red: #c40202;
+  --openbtn: #f9f9f9;
+  --openbtn-content: black;
+  --openbtn-hover: #ccc;
+  --message-hover: #c9c9c9;
+  --green: #019601;
+  --orange: #ff4800;
+  --sidebar-close-hover: black;
+  --message: black;
+  --input-bottom: #424242;
+  --room-btn: black;
+  --room-text: white;
+}
+
+/* placeholders \/ \/ */
+.bold {
+	color: #000; 
+}
+.italic {
+	color: #000; 
+}
+.underline {
+	color: #000; 
+}
+.strikethrough {
+	color: #000; 
+}
+

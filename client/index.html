@@ -1,0 +1,105 @@
+<!--
+┏┓╱┏┳━━┓
+┃┃╱┃┣┫┣┛
+┃┃╱┃┃┃┃
+┃┃╱┃┃┃┃
+┃┗━┛┣┫┣┓
+┗━━━┻━━┛
+-->
+<!DOCTYPE html>
+<html>
+	<head> 
+  	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="google-site-verification" content="uyhFavu5K3e5bT-HpLHh-vxJ-7vLgmQd44OpcRoGKgo" />
+  	<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  	<link href="https://fonts.googleapis.com/css?family=Balsamiq+Sans:400,900" rel="stylesheet">
+  	<link href="https://fonts.googleapis.com/css?family=Balsamiq+Sans:400,700" rel="stylesheet">
+  	<link rel="stylesheet" href="style.css"/>
+    <script async src="https://arc.io/widget.min.js#Kws52KR7"></script>
+    <script async src="arc-sw-core.js"></script>
+  	<!--Notification System \/ \/-->
+  	<script src="alerts.js"></script>
+  	<title>Froggy Chatroom [BETA]</title>
+  	<link rel="icon" href="./favicon.ico">
+	</head>
+	<body>
+  	<source src="new_message.mp3" type="audio/mpeg" id="pingAudio" />
+  	<!--Logon Page Start-->
+  	<script src="/socket.io/socket.io.js"></script>
+  	<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+  	<!--Name Prompt-->
+  	<div id="prompt">
+    	<div id="name-info">
+      	<p>Login</p>
+      	<button onclick="auth()">Login with Repl.it</button>
+      	<p class="loginOR">or</p>
+				<input id="guestInput" autocomplete="off" placeholder="Name..."></input><br>
+				<button id="guestBtn" onclick="guestLogin()">Login As Guest</button>
+    	</div>
+  	</div>
+  	<!--Login Page End-->
+		<div id="loadingScreen">
+			<img id="loadingpic" src="logo.png" alt="logo">
+		</div>
+  	<!--Main Chatroom HTML Start-->
+  	<div id="main-container">
+  	  <div id="chat-title">
+  	    <div id="mySidebar" class="sidebar">
+  	      <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+  	      <label class="container">Dark Mode&nbsp;&nbsp;
+  	        <input type="checkbox" checked="checked">
+  	        <span class="checkmark" onClick="toggleTheme()"></span>
+  	      </label><p>
+  	      <label class="container">Notifications&nbsp;&nbsp;
+  	        <input type="checkbox" checked="checked">
+  	        <span class="checkmark" onClick="notifToggle()"></span>
+  	      </label> 
+					<button onclick="Subscribe()">Subscribe</button>
+  	    </div>
+  	    <div id="main">
+  	      <button class="openbtn" onclick="openNav()">☰</button>
+  	      Froggy Chatroom [BETA]&nbsp;&nbsp;
+  	      <button id="createRoom" class="create-room" onClick="javascript:swal('Coming Soon!')">Create Room</button>
+  	      <button id="joinRoom" class="join-room" onClick="javascript:swal('Coming Soon!')">Join Room</button>
+  	      <button id="AnnouncementsBtn" class="announcements">Announcements</button>
+  	    </div>
+  	  </div>
+			<div id="Announcements" class="modal">
+  		<!-- Modal content -->
+	  	<div class="modal-content">
+  	  	<div class="modal-header">
+    	  	<span class="close">&times;</span>
+      		<h2>Announcements</h2>
+    		</div>
+    	<div class="modal-body">
+				<!-- <p class="text"><span class="announcement">[xx/xx/2021] </span>PLACEHOLDER</p><hr> -->
+        <p class="text"><span class="announcement">[3/9/2021] </span>Added Arc integration to boost the chatroom and for monetization!</p><hr>
+				<p class="text"><span class="announcement">[4/6/2021] </span>There is a small problem with the authentication page not closing after you authenticate, so it's a bit confusing. This was an issue after the loading screen was added to the chatroom. We are still fixing this issue as fast as possible.</p><hr>
+			<p class="text"><span class="announcement">[3/5/2021] </span>Added loading screen.</p><hr>
+      <p class="text"><span class="announcement">[3/1/2021] </span>Froggy Chatroom is almost out of BETA version!</p><hr>
+    </div>
+  </div>
+</div>
+    <div id="main-content">
+      <div id="main-spinner"></div>
+      <div id="chats">    
+      </div>
+      &nbsp;<div id="controls">
+        &nbsp;
+        <textarea id="message" class="input" cols="40" rows="5" autocomplete="off" placeholder="Message..."></textarea>
+        <button id="send" onclick="send()" class="send">Send</button>
+      </div>
+      <div id="who-container">
+        <p id="who-label"><span>Online:</span></p>
+        <div id="who-content">
+          <div id="who"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="reply-tooltip" class="tooltip">Reply</div>
+  <div id="copy-tooltip" class="tooltip">Copy</div>
+  <script src="main.js"></script>
+  <!--Main Chatroom HTML End-->
+</body>
+</html>
