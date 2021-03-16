@@ -1,6 +1,6 @@
 # 🐸 Froggy Chatroom 💬
 ###### Markdown (WIP) By: YeetsaJr
-### Here is the original version of the [Froggy Chatroom](<a href="https://froggy-chatroom.unluckyfroggy.repl.co"</a>)
+### Here is the original version of the [Froggy Chatroom]<a href="(https://froggy-chatroom.unluckyfroggy.repl.co")</a>
 ***
 ## How to Personalize
 
